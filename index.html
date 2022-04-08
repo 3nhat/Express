@@ -14,27 +14,28 @@
 <style>
 	
 	body {
-		height: 100%;
+    		height: 100%;
   		position: fixed;
-
+  		/* prevent overscroll bounce*/
+  
   		overflow-y: scroll;
   		-webkit-overflow-scrolling: touch;
 	}
 	
 	#Gioithieu, #Quang {
-        position: fixed;
-        /*border: solid;*/
-        width: 100%;
-        height: 100vh;
-        left: 0px;
-        top: 0px;
-        background: white; 
-    }
+        	position: fixed;
+        	/*border: solid;*/
+        	width: 100%;
+        	height: 100vh;
+        	left: 0px;
+        	top: 0px;
+        	background: white; 
+    	}
     
 	#Gioithieu {z-index: 99;}
     
 	#Quang {z-index: -1;}
-  #LuuTam {display: none;}
+  	#LuuTam {display: none;}
 
 	html, body {
         font-family: Arial, Helvetica, sans-serif;
@@ -132,6 +133,18 @@
   		}
 	}
 	*/
+	
+	@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+	  html {
+	    transform: rotate(-90deg);
+	    transform-origin: left top;
+	    width: 100vh;
+	    overflow-x: hidden;
+	    position: absolute;
+	    top: 100%;
+	    left: 0;
+	  }
+	}
 
 </style>
 </head>
@@ -181,6 +194,11 @@
 	
 	EID('container_loader').style.display = 'block';
     	
+	var Message_function = "";
+	var Message_variable = "";
+	
+	var Upload_function = "";
+	
 	window.onload = function() {
 		var box = EID('VirtualButton');
 	  	box.addEventListener('touchmove', function(e) {
@@ -197,6 +215,7 @@
 
 	}
 	
+	/*
 	navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
   		if (result.state == "granted" || result.state == "prompt") {
     			
@@ -212,12 +231,7 @@
 			alert("Chưa được cấp quyền đọc clipboard");
 		}
 	});
-	
-	var Message_function = "";
-	var Message_variable = "";
-	
-	var Upload_function = "";
-	
+	*/
 	window.addEventListener ("message", OnMessage, false);
 	function OnMessage (event) {
 		if (Message_function != "") {
@@ -232,8 +246,8 @@
 		if (Upload_function != "") {
 			window[Upload_function](obj);
 		}
-	}	
-	
+	}
+		
 	window.addEventListener('DOMContentLoaded', (event) => {
     		RunFirst('get','slag','','','','');
 		//RunFirst('get','slag','','');
